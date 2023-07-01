@@ -1,0 +1,26 @@
+version: '3.0'
+
+services:
+  backend:
+    image: 'springboot-docker-iso'
+    container_name: 'self-container'
+    depends_on: 
+      - pgdb
+    environment: 
+      - SERVER_PORT=5555
+      - SPRING_DATASOURCE_USERNAME=zhan
+      - SPRING_DATASOURCE_PASSWORD=qwerty
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://pgdb:5432/postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=false
+    ports:
+      - 8005:5555
+
+  pgdb:
+    image: 'postgres'
+    container_name: 'postgres-cont'
+    environment:
+      - POSTGRES_USER=zhan
+      - POSTGRES_PASSWORD=qwerty
+    ports: 
+      - 2345:5432
