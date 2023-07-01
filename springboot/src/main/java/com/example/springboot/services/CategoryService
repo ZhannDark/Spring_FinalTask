@@ -1,0 +1,20 @@
+package com.example.springboot.services;
+
+import com.example.springboot.model.TaskCategories;
+import com.example.springboot.repository.TaskCategoriesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+@Service
+public class CategoryService {
+
+    @Autowired
+    private TaskCategoriesRepository taskCategoriesRepository;
+    public TaskCategories getCategory(Long id){
+        return taskCategoriesRepository.findById(id).orElseThrow();
+    }
+    public void deleteCat(Long id){taskCategoriesRepository.deleteById(id);}
+    public List<TaskCategories> getAllCategories(){
+        return taskCategoriesRepository.findAll();
+    }
+}
